@@ -13,79 +13,23 @@ What each state is
 
 
 
-let state = 6;
+let state = 1;
 let background;
 let backgroundImg1, backgroundImg2, backgroundImg3;
 let name;
 let playerX = 500;
 let playerY = 500;
 
+let robberArray = [];
 let x1 = 25;
 let x2 = 1500;
 
 let y1 = 25;
 let y2 = 800;
 
-
-let xPos = 950;
-let yPos = 500;
-
-let xPos2 = 950;
-let yPos2 = 500;
-
-let xPos3 = 950;
-let yPos3 = 500;
-
-let xPos4 = 950;
-let yPos4 = 500;
-
-let xPos5 = 950;
-let yPos5 = 500;
-
-let xPos6 = 950;
-let yPos6 = 500;
-
-let xPos7 = 950;
-let yPos7 = 500;
-
-let xPos8 = 950;
-let yPos8 = 500;
-
-let xPos9 = 950;
-let yPos9 = 500;
-
-let xPos10 = 950;
-let yPos10 = 500;
-
 let xDirection = 1;
 let yDirection = 1;
 
-let xDirection2 = 1;
-let yDirection2 = 1;
-
-let xDirection3 = 1;
-let yDirection3 = 1;
-
-let xDirection4 = 1;
-let yDirection4 = 1;
-
-let xDirection5 = 1;
-let yDirection5 = 1;
-
-let xDirection6 = 1;
-let yDirection6 = 1;
-
-let xDirection7 = 1;
-let yDirection7 = 1;
-
-let xDirection8 = 1;
-let yDirection8 = 1;
-
-let xDirection9 = 1;
-let yDirection9 = 1;
-
-let xDirection10 = 1;
-let yDirection10 = 1;
 
 
 function preload() {
@@ -104,35 +48,15 @@ function preload() {
 function setup() {
     fill(0, 0, 255);
     createCanvas(1900, 1000);
-    xSpeed = random(-5, 10);
-    ySpeed = random(-5, 10);
+    for (let i = 0; i < 10; i++) {
 
-    xSpeed2 = random(-5, 10);
-    ySpeed2 = random(-5, 10);
+        let robbertemp = new rabber(robber, 950, 500, 50, 50,random(-5,10),random(-5,10));
+        robberArray.push(robbertemp);
 
-    xSpeed3 = random(-5, 10);
-    ySpeed3 = random(-5, 10);
+    }
+    console.log(robberArray);
+    
 
-    xSpeed4 = random(-5, 10);
-    ySpeed4 = random(-5, 10);
-
-    xSpeed5 = random(-5, 10);
-    ySpeed5 = random(-5, 10);
-
-    xSpeed6 = random(-5, 10);
-    ySpeed6 = random(-5, 10);
-
-    xSpeed7 = random(-5, 10);
-    ySpeed7 = random(-5, 10);
-
-    xSpeed8 = random(-5, 10);
-    ySpeed8 = random(-5, 10);
-
-    xSpeed9 = random(-5, 10);
-    ySpeed9 = random(-5, 10);
-
-    xSpeed10 = random(-5, 10);
-    ySpeed10 = random(-5, 10);
 
 
 
@@ -318,114 +242,23 @@ function draw() {
         image(backgroundImg3, 950, 500, 1900, 1000);
 
         imageMode(CENTER);
-        image(robber, xPos, yPos, 50, 50);
-        xPos += xSpeed * xDirection;
-        yPos += ySpeed * yDirection;
-
-        if (xPos < x1 || xPos > x2) {
-            xDirection *= -1;
-        }
-        else if (yPos < y1 || yPos > y2) {
-            yDirection *= -1;
-        }
-
-        image(robber, xPos2, yPos2, 50, 50);
-        xPos2 += xSpeed2 * xDirection2;
-        yPos2 += ySpeed2 * yDirection2;
-
-        if (xPos2 < x1 || xPos2 > x2) {
-            xDirection2 *= -1;
-        }
-        else if (yPos2 < y1 || yPos2 > y2) {
-            yDirection2 *= -1;
-        }
-
-        image(robber, xPos3, yPos3, 50, 50);
-        xPos3 += xSpeed3 * xDirection3;
-        yPos3 += ySpeed3 * yDirection3;
-
-        if (xPos3 < x1 || xPos3 > x2) {
-            xDirection3 *= -1;
-        }
-        else if (yPos3 < y1 || yPos3 > y2) {
-            yDirection3 *= -1;
-        }
-
-        image(robber, xPos4, yPos4, 50, 50);
-        xPos4 += xSpeed4 * xDirection4;
-        yPos4 += ySpeed4 * yDirection4;
-
-        if (xPos4 < x1 || xPos4 > x2) {
-            xDirection4 *= -1;
-        }
-        else if (yPos4 < y1 || yPos4 > y2) {
-            yDirection4 *= -1;
-        }
-
-        image(robber, xPos5, yPos5, 50, 50);
-        xPos5 += xSpeed5 * xDirection5;
-        yPos5 += ySpeed5 * yDirection5;
-
-        if (xPos5 < x1 || xPos5 > x2) {
-            xDirection5 *= -1;
-        }
-        else if (yPos5 < y1 || yPos5 > y2) {
-            yDirection5 *= -1;
-        }
-
-        image(robber, xPos6, yPos6, 50, 50);
-        xPos6 += xSpeed6 * xDirection6;
-        yPos6 += ySpeed6 * yDirection6;
-
-        if (xPos6 < x1 || xPos6 > x2) {
-            xDirection6 *= -1;
-        }
-        else if (yPos6 < y1 || yPos6 > y2) {
-            yDirection6 *= -1;
-        }
-
-        image(robber, xPos7, yPos7, 50, 50);
-        xPos7 += xSpeed7 * xDirection7;
-        yPos7 += ySpeed7 * yDirection7;
-
-        if (xPos7 < x1 || xPos7 > x2) {
-            xDirection7 *= -1;
-        }
-        else if (yPos7 < y1 || yPos7 > y2) {
-            yDirection7 *= -1;
-        }
-
-        image(robber, xPos8, yPos8, 50, 50);
-        xPos8 += xSpeed8 * xDirection8;
-        yPos8 += ySpeed8 * yDirection8;
-
-        if (xPos8 < x1 || xPos8 > x2) {
-            xDirection8 *= -1;
-        }
-        else if (yPos8 < y1 || yPos8 > y2) {
-            yDirection8 *= -1;
-        }
-
-        image(robber, xPos9, yPos9, 50, 50);
-        xPos9 += xSpeed9 * xDirection9;
-        yPos9 += ySpeed9 * yDirection9;
-
-        if (xPos9 < x1 || xPos9 > x2) {
-            xDirection9 *= -1;
-        }
-        else if (yPos9 < y1 || yPos9 > y2) {
-            yDirection9 *= -1;
-        }
-
-        image(robber, xPos10, yPos10, 50, 50);
-        xPos10 += xSpeed10 * xDirection10;
-        yPos10 += ySpeed10 * yDirection10;
-
-        if (xPos10 < x1 || xPos10 > x2) {
-            xDirection10 *= -1;
-        }
-        else if (yPos10 < y1 || yPos10 > y2) {
-            yDirection10 *= -1;
+        for (let i = 0; i < robberArray.length; i++) {
+            robberArray[i].yPos += robberArray[i].ySpeed*yDirection;
+            robberArray[i].xPos += robberArray[i].xSpeed*xDirection;
+    
+            if (robberArray[i].xPos < x1 || robberArray[i].xPos> x2) {
+                xDirection *= -1;
+            }
+            else if (robberArray[i].yPos < y1 || robberArray[i].yPos > y2) {
+                yDirection *= -1;
+            }
+          
+    
+    
+            image(robberArray[i].pic, robberArray[i].xPos, robberArray[i].yPos, robberArray[i].width, robberArray[i].height);
+            console.log("test")
+    
+    
         }
         rect(playerX, playerY, 50, 50);
         movement();
@@ -530,3 +363,14 @@ function movement() { // we will call in the draw
 
 
 
+class rabber {
+    constructor(img, x, y, w, h,speedx,speedY) {
+        this.pic = img;
+        this.xPos = x;
+        this.yPos = y;
+        this.width = w;
+        this.height = h;
+        this.xSpeed=speedx;
+        this.ySpeed=speedY;
+    }
+}
