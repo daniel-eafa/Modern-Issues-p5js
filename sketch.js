@@ -11,13 +11,15 @@ What each state is
 
 */
 
+let hostageX = 1825
+let hostageY = 500
 
 
-let state = 1;
+let state = 6;
 let background;
 let backgroundImg1, backgroundImg2, backgroundImg3;
 let name;
-let playerX = 500;
+let playerX = 25;
 let playerY = 500;
 
 let robberArray = [];
@@ -39,6 +41,7 @@ function preload() {
     backgroundImg3 = loadImage("images/black.webp");
     mad = loadImage("images/mad.png");
     robber = loadImage("images/robber.png");
+    peach = loadImage("images/peach.png");
 
 
 
@@ -48,14 +51,14 @@ function preload() {
 function setup() {
     fill(0, 0, 255);
     createCanvas(1900, 1000);
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 15; i++) {
 
-        let robbertemp = new rabber(robber, 950, 500, 50, 50,random(-5,10),random(-5,10));
+        let robbertemp = new rabber(robber, random(50, 1000), random(50, 1000), 50, 50, random(-5, 25), random(-5, 10));
         robberArray.push(robbertemp);
 
     }
     console.log(robberArray);
-    
+
 
 
 
@@ -76,6 +79,7 @@ function myInputEvent() {
 
 
 function draw() {
+
     if (state == "lose") {
         image(backgroundImg3, 0, 0, 1900, 1000);
         image(mad, 750, 300);
@@ -238,30 +242,89 @@ function draw() {
     }
 
     if (state == 6) {
-        
+
         image(backgroundImg3, 950, 500, 1900, 1000);
+        fill(255, 0, 0)
+        rect(1800, 10, 100, 1000);
+
 
         imageMode(CENTER);
         for (let i = 0; i < robberArray.length; i++) {
-            robberArray[i].yPos += robberArray[i].ySpeed*yDirection;
-            robberArray[i].xPos += robberArray[i].xSpeed*xDirection;
-    
-            if (robberArray[i].xPos < x1 || robberArray[i].xPos> x2) {
+            robberArray[i].yPos += robberArray[i].ySpeed * yDirection;
+            robberArray[i].xPos += robberArray[i].xSpeed * xDirection;
+
+            if (robberArray[i].xPos < x1 || robberArray[i].xPos > x2) {
                 xDirection *= -1;
             }
             else if (robberArray[i].yPos < y1 || robberArray[i].yPos > y2) {
                 yDirection *= -1;
             }
-          
-    
-    
+
+
+
             image(robberArray[i].pic, robberArray[i].xPos, robberArray[i].yPos, robberArray[i].width, robberArray[i].height);
-            console.log("test")
-    
+            //console.log("test")
+            d = dist(robberArray[i].xPos, robberArray[i].yPos, playerX, playerY);
+
+
+            if (d < 50) { //50 is the distance between the two center point of rec and img object  
+                // each side of the img is 25px away from img center so its like a radius
+                // each side of rec is too since we set size meaning height and width(diameter)=50. 
+                console.log("game over") //test to see if it works
+                state = "gameover";
+
+            }
+            rect(hostageX, hostageY, 50, 50)
+            d2 = dist(hostageX, hostageY, playerX, playerY);
+            if (d2 < 50) {
+                state = 7;
+
+            }
+            rect(playerX, playerY, 50, 50);
+            movement();
+
+
+
+
+
+
+
+        }
+
+        
+        /*
+        if (state == 7) {
+            imageMode(CORNER);
+            image(backgroundImg2, 0, 0, 1900, 1000);
+            image(lakitu, 800, 0);
+            /*fill(255, 255, 255);
+            rect(700, 600, 500, 100);
+
+            fill(0, 0, 0);
+            textSize(18);
+            text("Most people don't realize how big of an issue this is in America in comparison to other countries. Most countries, even other big ones like Japan, average less than 1 a day!", 710, 610, 500, 100);
+
+            fill(255, 0, 0);
+            rect(1500, 700, 100, 50);
+            fill(255, 255, 255);
+            text("Continue", 1510, 720, 100, 100);
+
+        }
+        console.log(state);*/
+
+
+
+       
+        /*
+        if(playerX - 25 > xPos + 25 || playerX + 25 < xPos - 25 || playerX - 25 > yPos + 25 || yPos - 25 < playerX + 25){
+        }
+        else{
+            fill(255, 255, 0);
+            text(" Collision", 200, 200);
     
         }
-        rect(playerX, playerY, 50, 50);
-        movement();
+
+
         /*
         if(playerX - 25 > blockRight1 || playerX + 25  < blockLeft1 || playerTop > blockBottom1 || playerBottom < blockTop1){
         }
@@ -270,17 +333,6 @@ function draw() {
             text(" Collision", 200, 200);
     
         }*/
-
-        
-
-        
-
-
-
-
-
-
-
         /*
         xPos = 5;
         image(backgroundImg3, 0, 0, 1900, 1000);
@@ -294,8 +346,24 @@ function draw() {
         xPos += 3;*/
 
     }
+    if (state == 'gameover') {
+        image(backgroundImg3, 950, 500, 1900, 1000);
+        fill(255, 0, 0);
+        textAlign(CENTER, CENTER);//tells you where to start showing the text left right or center of coordinate
+        image(backgroundImg3, 950, 500, 1900, 1000);
+        textSize(250);
+        text("Game Over", 1900 / 2, 1000 / 2);
+        textSize(20);
+        text("You've failed. The criminals got away and the bad things in the world continue.", 500, 700, 1000, 100)
+        // need to fix this since after imageMode(center) the image isnt as big
+
+    }
+
+
+
 
 }
+
 
 function mouseClicked() {
     if (state == 1 && mouseX > 50 && mouseX < 300 && mouseY > 350 && mouseY < 825) {
@@ -344,19 +412,19 @@ function mouseClicked() {
 
 function movement() { // we will call in the draw 
     if (keyIsDown(LEFT_ARROW)) {
-        playerX -= 3;
+        playerX -= 1;
     }
-        
+
     if (keyIsDown(RIGHT_ARROW)) {
-        playerX += 3;
+        playerX += 1;
     }
 
     if (keyIsDown(UP_ARROW)) {
-        playerY -= 3;
+        playerY -= 1;
     }
 
     if (keyIsDown(DOWN_ARROW)) {
-        playerY +=3;
+        playerY += 1;
     }
 }
 
@@ -364,13 +432,13 @@ function movement() { // we will call in the draw
 
 
 class rabber {
-    constructor(img, x, y, w, h,speedx,speedY) {
+    constructor(img, x, y, w, h, speedx, speedY) {
         this.pic = img;
         this.xPos = x;
         this.yPos = y;
         this.width = w;
         this.height = h;
-        this.xSpeed=speedx;
-        this.ySpeed=speedY;
+        this.xSpeed = speedx;
+        this.ySpeed = speedY;
     }
 }
