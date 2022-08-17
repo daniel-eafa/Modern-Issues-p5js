@@ -15,7 +15,7 @@ let hostageX = 1825
 let hostageY = 500
 
 
-let state = 6;
+let state = 1;
 let background;
 let backgroundImg1, backgroundImg2, backgroundImg3;
 let name;
